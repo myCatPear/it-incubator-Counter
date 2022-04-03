@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background-color: #2C2C35;
+    font-family: Roboto,sans-serif;
+}
+
+.App {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.mainForm {
+    border:2px solid #08A9DB;
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    gap:10px;
+    flex-direction: column;
+}
+
+.dataForm {
+    border:2px solid #08A9DB;
+    border-radius: 6px;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 300px;
+}
+
+.dataForm__label {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.dataForm__input {
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 0;
+    border:none;
+    width: 100px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.dataForm__input_error {
+    background-color: red;
+}
+
+
+.funcForm {
+    border:2px solid #08A9DB;
+    border-radius: 6px;
+    padding: 10px 15px;
+}
+
+.dataForm__text {
+    color: #08A9DB;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.funcForm {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+/*-------------------------------BUTTON---------------------*/
+
+.button {
+    background-color: #08A9DB;
+    color:#2C2C35;
+    border: none;
+    padding: 5px 10px;
+    font-size: 24px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.button__disabled {
+    opacity: 0.5;
+}
+
+/*-------------------COUNTER-------------------*/
+
+.dataForm__value {
+    font-size: 50px;
+    color: #08A9DB;
+    padding: 14px 0;
+}
+
+.dataForm__value_changed {
+    font-size: 26px;
+    color:red;
+    padding: 27.5px 10px;
+}
