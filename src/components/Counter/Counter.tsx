@@ -1,7 +1,6 @@
 import React from 'react';
 import g from '../../App.module.css'
 import Button from "../common/Button";
-import {isDisabled} from "@testing-library/user-event/dist/utils";
 
 type CounterPropsType = {
     counterValue: number
@@ -10,25 +9,31 @@ type CounterPropsType = {
     maxValue: number
     changedInput: boolean
     setChangedInput: (isChanged: boolean) => void
-    isDisabled: boolean
-    setIsDisabled: (isDisabled: boolean) => void
-    errorInput:boolean
-    setErrorInput:(isError:boolean) => void
+    errorInput: boolean
+    setErrorInput: (isError: boolean) => void
+    isDisabledInc: boolean
+    setIsDisabledInc: (isDisabled: boolean) => void
+    isDisabledReset: boolean
+    setIsDisabledReset: (isDisabled: boolean) => void
 }
 
 
 const Counter = (props: CounterPropsType) => {
     const incValueHandler = () => {
-        if (props.counterValue === props.maxValue) return
+       /* if (props.counterValue === props.maxValue) {
+            props.setIsDisabledInc(true)
+        }*/
         props.setCounterValue(props.counterValue + 1)
     }
 
     const resetValueHandler = () => {
         props.setCounterValue(props.startValue)
+        props.setIsDisabledInc(false)
     }
 
     const spanClassName = `
     ${!props.changedInput && g.dataForm__value}
+    ${props.counterValue === props.maxValue ? g.dataForm__text_error : ""}
     ${props.changedInput && g.dataForm__value_changed}
     ${props.errorInput && g.dataForm__value_changed}
     `
@@ -44,16 +49,16 @@ const Counter = (props: CounterPropsType) => {
             </div>
             <div className={g.funcForm}>
                 <Button
-                    style={`${g.button} ${props.isDisabled && g.button__disabled}`}
+                    style={`${g.button} ${props.isDisabledInc && g.button__disabled}`}
                     title={'inc'}
                     callback={incValueHandler}
-                    isDisabled={props.isDisabled}
+                    isDisabled={props.isDisabledInc}
                 />
                 <Button
-                    style={`${g.button} ${props.isDisabled && g.button__disabled}`}
+                    style={`${g.button} ${props.isDisabledReset && g.button__disabled}`}
                     title={'reset'}
                     callback={resetValueHandler}
-                    isDisabled={props.isDisabled}
+                    isDisabled={props.isDisabledReset}
                 />
             </div>
         </div>

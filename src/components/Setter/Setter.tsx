@@ -10,8 +10,8 @@ type SetterPropsType = {
     setCounterValue: (number: number) => void
     changedInput: boolean
     setChangedInput: (isChanged: boolean) => void
-    isDisabled: boolean
-    setIsDisabled: (isDisabled: boolean) => void
+    isDisabledSet: boolean
+    setIsDisabledSet: (isDisabled: boolean) => void
     errorInput:boolean
     setErrorInput:(isError:boolean) => void
 }
@@ -25,35 +25,31 @@ const Setter: React.FC<SetterPropsType> = (
         setCounterValue,
         changedInput,
         setChangedInput,
-        isDisabled,
-        setIsDisabled,
+        isDisabledSet,
+        setIsDisabledSet,
         errorInput,
         setErrorInput
     }) => {
 
     const onChangeStartInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setChangedInput(true)
-        setIsDisabled(false)
+        setIsDisabledSet(false)
         setStartValue(JSON.parse(e.currentTarget.value))
+
     }
 
     const onChangeMaxInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            if (maxValue <= startValue) {
-                setErrorInput(true)
-                setIsDisabled(true)
-                setMaxValue(JSON.parse(e.currentTarget.value))
-            } else {
-                setErrorInput(false)
-                setChangedInput(true)
-                setIsDisabled(false)
-                setMaxValue(JSON.parse(e.currentTarget.value))
-            }
+        setCounterValue(0)
+        setMaxValue(+e.currentTarget.value)
     }
 
     const sendStartInputToCounterHandler = () => {
         setCounterValue(startValue)
         setChangedInput(false)
+        setIsDisabledSet(true)
     }
+
+    console.log(maxValue)
 
     return (
         <div className={g.mainForm}>
@@ -80,8 +76,8 @@ const Setter: React.FC<SetterPropsType> = (
                 <Button
                     title={'set'}
                     callback={sendStartInputToCounterHandler}
-                    style={`${g.button} ${isDisabled && g.button__disabled}`}
-                    isDisabled={isDisabled}
+                    style={`${g.button} ${isDisabledSet && g.button__disabled}`}
+                    isDisabled={isDisabledSet}
                 />
             </div>
         </div>

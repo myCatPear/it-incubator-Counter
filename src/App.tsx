@@ -8,7 +8,9 @@ function App() {
     const [maxValue, setMaxValue] = useState<number>(10) // максимальное значение
     const [counterValue, setCounterValue] = useState<number>(0) // число счетчика
     const [changedInput, setChangedInput] = useState(false) //если ввели новые значения в инпут
-    const [isDisabled, setIsDisabled] = useState(false) // делать кнопку недоступной
+    const [isDisabledSet, setIsDisabledSet] = useState(false) // делать кнопку Set недоступной
+    const [isDisabledInc, setIsDisabledInc] = useState(false) // делать кнопку Inc недоступной
+    const [isDisabledReset, setIsDisabledReset] = useState(false) // делать кнопку Inc недоступной
     const [errorInput, setErrorInput] = useState(false) //если ввели некорректные числа
 
     useEffect(() => {
@@ -21,8 +23,29 @@ function App() {
     useEffect(() => {
         localStorage.setItem('maxValue', JSON.stringify(maxValue))
         localStorage.setItem('startValue', JSON.stringify(startValue))
+
+        if (maxValue <= startValue) {
+            setErrorInput(true)
+            setIsDisabledSet(true)
+        } else {
+            setIsDisabledInc(false)
+            setErrorInput(false)
+            setChangedInput(true)
+            setIsDisabledSet(false)
+        }
+
+        if (startValue < 0) {
+            setErrorInput(true)
+            setIsDisabledSet(true)
+        }
+
     },[maxValue,startValue])
 
+    useEffect(() => {
+        if (counterValue === maxValue) {
+            setIsDisabledInc(true)
+        }
+    },[counterValue,maxValue])
 
     return (
         <div className={g.App}>
@@ -35,8 +58,8 @@ function App() {
                     setCounterValue={setCounterValue}
                     changedInput={changedInput}
                     setChangedInput={setChangedInput}
-                    isDisabled={isDisabled}
-                    setIsDisabled={setIsDisabled}
+                    isDisabledSet={isDisabledSet}
+                    setIsDisabledSet={setIsDisabledSet}
                     errorInput={errorInput}
                     setErrorInput={setErrorInput}
                 />
@@ -47,10 +70,12 @@ function App() {
                     maxValue={maxValue}
                     changedInput={changedInput}
                     setChangedInput={setChangedInput}
-                    isDisabled={isDisabled}
-                    setIsDisabled={setIsDisabled}
                     errorInput={errorInput}
                     setErrorInput={setErrorInput}
+                    isDisabledInc={isDisabledInc}
+                    setIsDisabledInc={setIsDisabledInc}
+                    isDisabledReset={isDisabledReset}
+                    setIsDisabledReset={setIsDisabledReset}
                 />
             </div>
 

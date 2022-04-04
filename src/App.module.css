@@ -73,6 +73,8 @@ body {
     font-weight: 600;
 }
 
+
+
 .funcForm {
     display: flex;
     justify-content: center;
@@ -106,4 +108,8 @@ body {
     font-size: 26px;
     color:red;
     padding: 27.5px 10px;
+}
+
+.dataForm__text_error {
+    color:red;
 }
