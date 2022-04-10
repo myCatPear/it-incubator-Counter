@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import g from './App.module.css';
 import Counter from "./components/Counter/Counter";
+import CounterAndSetter from './components/CounterAndSetter/CounterAndSetter';
 import Setter from "./components/Setter/Setter";
 
 function App() {
+    //----------START USE STATE COUNTER 1 VERSION----------------
     const [startValue, setStartValue] = useState<number>(0) // начальное значение
     const [maxValue, setMaxValue] = useState<number>(10) // максимальное значение
     const [counterValue, setCounterValue] = useState<number>(0) // число счетчика
@@ -12,13 +14,14 @@ function App() {
     const [isDisabledInc, setIsDisabledInc] = useState(false) // делать кнопку Inc недоступной
     const [isDisabledReset, setIsDisabledReset] = useState(false) // делать кнопку Inc недоступной
     const [errorInput, setErrorInput] = useState(false) //если ввели некорректные числа
+//----------END USE STATE COUNTER 1 VERSION----------------
 
     useEffect(() => {
         const localStorageStartValue = localStorage.getItem('startValue')
         const localStorageMaxValue = localStorage.getItem('maxValue')
         if (localStorageStartValue) setStartValue(JSON.parse(localStorageStartValue))
         if (localStorageMaxValue) setMaxValue(JSON.parse(localStorageMaxValue))
-    },[])
+    }, [])
 
     useEffect(() => {
         localStorage.setItem('maxValue', JSON.stringify(maxValue))
@@ -39,13 +42,14 @@ function App() {
             setIsDisabledSet(true)
         }
 
-    },[maxValue,startValue])
+    }, [maxValue, startValue])
 
     useEffect(() => {
         if (counterValue === maxValue) {
             setIsDisabledInc(true)
         }
-    },[counterValue,maxValue])
+    }, [counterValue, maxValue])
+
 
     return (
         <div className={g.App}>
@@ -78,7 +82,9 @@ function App() {
                     setIsDisabledReset={setIsDisabledReset}
                 />
             </div>
-
+            <div className={g.container}>
+                <CounterAndSetter/>
+            </div>
         </div>
     );
 }
